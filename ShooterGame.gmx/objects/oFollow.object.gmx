@@ -8,31 +8,6 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>map = mp_grid_create(0,0,room_width div 32,room_height div 32,32,32);
-mp_grid_add_instances(map,oWall,false);
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -50,14 +25,13 @@ mp_grid_add_instances(map,oWall,false);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with (parEnemy)
-    {
-    path = path_add();
-    if mp_grid_path(oGame.map, path, x, y, oPlayer.x, oPlayer.y, 1)
-       {
-       path_start(path, parEnemy.spd, 3, 0);
-       }
-    }
+            <string>xx = oPlayer.x
+yy = oPlayer.y
+
+//Set Camera
+view_xview[0] = xx - view_wview[0]/2;
+view_yview[0] = yy - view_hview[0]/2;
+
 </string>
           </argument>
         </arguments>

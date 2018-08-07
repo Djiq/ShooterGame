@@ -60,10 +60,10 @@ for(var i = 0; i &lt; 360; i+=1){
 var length = 131;
 
     do{
-        length -=1;
-    }until((!collision_line(x,y,x+lengthdir_x(length-10,i),y+lengthdir_y(length-10,i),oWall,false,false)))
+        length -=2;
+    }until((!collision_line(oPlayer.x,oPlayer.y,oPlayer.x+lengthdir_x(length-16,i),oPlayer.y+lengthdir_y(length-16,i),oStopLight,false,false)))
    
-     draw_line_width_colour(x,y,x+lengthdir_x(length,i),y+lengthdir_y(length,i),3,c_white,c_black);
+     draw_line_width_colour(oPlayer.x,oPlayer.y,oPlayer.x+lengthdir_x(length,i),oPlayer.y+lengthdir_y(length,i),3,c_white,c_black);
 }
 
 
@@ -101,6 +101,7 @@ surface_reset_target();
             <kind>1</kind>
             <string>x=oPlayer.x;
 y=oPlayer.y;
+depth = -y - 1000;
 </string>
           </argument>
         </arguments>
@@ -123,8 +124,10 @@ y=oPlayer.y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(surface_exists(dark)){
-draw_surface(dark,view_xview,view_yview)
+            <string>
+
+if(surface_exists(dark)){
+draw_surface(dark,0,0)
 } else {
 
 dark=surface_create(room_width,room_height);

@@ -7,21 +7,36 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sPlayer</sprite>
+    <sprite>sprites\sEnemy</sprite>
     <sprite>sprites\sWall</sprite>
     <sprite>sprites\sHitbox</sprite>
     <sprite>sprites\sBullet</sprite>
-    <sprite>sprites\sLight</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_floor</background>
+    <background>background\tile_wall</background>
+    <background>background\tile_dirtywall</background>
+    <background>background\tileset_basic</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scrShoot.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\oLight</object>
-    <object>objects\oPlayer</object>
-    <object>objects\oWall</object>
-    <object>objects\oProjectile</object>
+    <objects name="Player">
+      <object>objects\oPlayer</object>
+      <object>objects\oLight</object>
+    </objects>
+    <objects name="Game">
+      <object>objects\oWall</object>
+      <object>objects\oProjectile</object>
+      <object>objects\oGame</object>
+      <object>objects\oStopLight</object>
+    </objects>
+    <objects name="Enemy">
+      <object>objects\parEnemy</object>
+      <object>objects\oEnemy</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rmGame</room>

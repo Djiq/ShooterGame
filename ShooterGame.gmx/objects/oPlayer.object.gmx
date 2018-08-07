@@ -28,8 +28,9 @@
             <string>hsp = 0;
 vsp = 0;
 spd = 2;
-
-
+rel = 0;
+hp = 20;
+maxhp = 20;
    
 
 ammo_load = 0;
@@ -42,7 +43,30 @@ atkspeed = 16;
 
 alarm[0] = respeed;
 alarm[1] = atkspeed;
+alarm[2] = 0;
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -154,25 +178,33 @@ if(alarm[0] &lt;=0){
         if(mouse_check_button_pressed(mb_left)){
             if(ammo_load &gt; 0) {
                 ammo_load -= 1 ;
-                scrShoot(sBullet,5,mouse,2,0,0,240);
+                scrShoot(sBullet,5,mouse,2,0,0,240,parEnemy);
                 alarm[1] = atkspeed;
                 
             } 
         }    
     }
 }
+
 if(keyboard_check_pressed(ord("R"))){
-    if(ammo &gt;= maxammo){
-        alarm[0] = respeed;
+    if(alarm[0] &lt;= 0){
+        alarm[0] = respeed
+        rel = 1;
+    }
+
+}
+if(rel == 1 and alarm[0] &lt;= 0){
+if(ammo &gt;= maxammo){
+    
         ammo_load = maxammo
         ammo -= maxammo
     
     } else if(ammo &gt; 0 and ammo &lt; maxammo){
-        alarm[0] = respeed;
+       
         ammo_load = ammo;
         ammo -= ammo_load;
-    }
-
+}
+rel = 0;
 }
 //note:add more weapons
 //note:add equipment
@@ -185,6 +217,9 @@ if(keyboard_check(ord("C"))){
 }
 
 //
+view_xview = oPlayer.x - view_wview;
+view_yview = oPlayer.y - view_hview;
+
 
 </string>
           </argument>
@@ -208,9 +243,16 @@ if(keyboard_check(ord("C"))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_colour(c_white)
+            <string>
+draw_set_colour(c_white)
 draw_text(32,32,ammo)
 draw_text(32,64,ammo_load)
+
+
+var ammon = (alarm[0]/respeed)*100;
+var hpl = (hp/maxhp)*100
+draw_healthbar(32,96,64,128,ammon,c_white,c_black,c_black,2,1,0)
+draw_healthbar(32,128,64,320,hpl,c_black,c_orange,c_red,2,1,0)
 </string>
           </argument>
         </arguments>
@@ -233,8 +275,22 @@ draw_text(32,64,ammo_load)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var rot = point_direction(x, y, mouse_x, mouse_y);
-draw_sprite_ext(sPlayer,0,x,y,1,1,rot,c_white,1);
+            <string>
+var color = c_white;
+if(alarm[2] &gt; 0){
+color = make_colour_rgb(255,255 - alarm[2]*3, 255 - alarm[2]*3);
+
+
+}
+var scale = 1;
+if(sign(x - mouse_x) = -1){
+scale = -1
+}
+if(sign(x - mouse_x) = 1){
+scale = 1
+}
+
+draw_sprite_ext(sPlayer,0,x,y,scale,1,1,color,1);
 </string>
           </argument>
         </arguments>
